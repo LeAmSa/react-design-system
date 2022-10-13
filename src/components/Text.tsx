@@ -6,19 +6,24 @@ export interface TextPros {
   size?: "sm" | "md" | "lg";
   children: ReactNode;
   asChild?: boolean;
+  className?: string;
 }
 
-export function Text({ size = "md", children, asChild }: TextPros) {
+export function Text({ size = "md", children, asChild, className }: TextPros) {
   //usando o Slot do radix para deixar a tag html dinâmica
   const Comp = asChild ? Slot : "span";
 
   return (
     <Comp
-      className={clsx("text-gray-100 font-sans", {
-        "text-xs": size === "sm",
-        "text-sm": size === "md",
-        "text-lg": size === "lg",
-      })}
+      className={clsx(
+        "text-gray-100 font-sans",
+        {
+          "text-xs": size === "sm",
+          "text-sm": size === "md",
+          "text-lg": size === "lg",
+        },
+        className
+      )}
     >
       {children}
     </Comp>

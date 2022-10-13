@@ -6,19 +6,29 @@ export interface HeadingPros {
   size?: "sm" | "md" | "lg";
   children: ReactNode;
   asChild?: boolean;
+  className?: string;
 }
 
-export function Heading({ size = "md", children, asChild }: HeadingPros) {
+export function Heading({
+  size = "md",
+  children,
+  asChild,
+  className,
+}: HeadingPros) {
   //usando o Slot do radix para deixar a tag html dinâmica
   const Comp = asChild ? Slot : "h2";
 
   return (
     <Comp
-      className={clsx("text-gray-100 font-bold font-sans", {
-        "text-lg": size === "sm",
-        "text-xl": size === "md",
-        "text-2xl": size === "lg",
-      })}
+      className={clsx(
+        "text-gray-100 font-bold font-sans",
+        {
+          "text-lg": size === "sm",
+          "text-xl": size === "md",
+          "text-2xl": size === "lg",
+        },
+        className
+      )}
     >
       {children}
     </Comp>
